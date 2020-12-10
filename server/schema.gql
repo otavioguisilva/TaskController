@@ -1,0 +1,139 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Tarefa {
+  tarCodigo: Int!
+  tarTitulo: String!
+  tarDescricao: String!
+  tarCltcodigo: Int!
+  tarDtHrAbert: String
+  tarStatus: String
+  tarUsrcodigo: Int!
+  tarDtHrFecha: String
+  getClassificacao: ClassificaTar!
+  getUsuario: Usuario!
+}
+
+type ClassificaTar {
+  cltCodigo: Int!
+  cltDescricao: String!
+  cltStrcodigo: Int!
+  setor: Setor!
+}
+
+type Setor {
+  strCodigo: Int!
+  strDescricao: String!
+}
+
+type Usuario {
+  usrCodigo: Int!
+  usrLogin: String!
+  usrNomecompleto: String!
+  usrEmail: String!
+  usrSenha: String!
+  usrStrcodigo: Int!
+  usrDtnascimento: String!
+  usrCaminhoFoto: String!
+  setor: Setor!
+}
+
+type HoraTarefa {
+  htrCodigo: Int!
+  htrTarcodigo: Int!
+  htrUsrcodigo: Int!
+  htrClhcodigo: Int!
+  htrData: String!
+  htrTipo: String!
+  htrHoras: Float!
+  htrMinutos: Float!
+  htrDescricao: String!
+  htrStatus: String!
+  getClassificacao: ClassificaHora!
+  getTarefa: Tarefa!
+}
+
+type ClassificaHora {
+  clhCodigo: Int!
+  clhDescricao: String!
+  clhStrcodigo: Float!
+  setor: Setor!
+}
+
+type Query {
+  allClassificaHora: [ClassificaHora!]!
+  buscaClassificaHora(valorCampo: String!, campo: String!): [ClassificaHora!]!
+  allClassificaTar: [ClassificaTar!]!
+  buscaClassificaTar(valorCampo: String!, campo: String!): [ClassificaTar!]!
+  getHorasTarefa(tarefa: Float!): HoraTarefa!
+  getHora(horacodigo: Float!): HoraTarefa!
+  buscaSetores(valorCampo: String!, campo: String!): [Setor!]!
+  allSetores: [Setor!]!
+  allUsuarios: [Usuario!]!
+  getFotoUsuario(usrId: Float!): Usuario!
+  buscaUsuario(valorCampo: String!, campo: String!): [Usuario!]!
+}
+
+type Mutation {
+  insereClassificaHora(data: ClassificaHoraInput!): ClassificaHora!
+  insereClassificaTar(data: ClassificaTarInput!): ClassificaTar!
+  InsereHoraManual(data: HoraTarefaInput!): HoraTarefa!
+  IniciaHoraAuto(data: HoraTarefaInput!): HoraTarefa!
+  finalizaHoraAuto(data: HoraTarefaInput!): HoraTarefa!
+  insereSetor(data: SetorInput!): Setor!
+  insereTarefa(data: TarefaInput!): Tarefa!
+  excutaTarefa(tarcodigo: Float!): Tarefa!
+  loginUsuario(senha: String!, loginOrEmail: String!): Usuario
+  insereUsuario(datas: UsuarioInput!): Usuario!
+}
+
+input ClassificaHoraInput {
+  clhDescricao: String!
+  clhStrcodigo: Float!
+}
+
+input ClassificaTarInput {
+  cltDescricao: String!
+  cltStrcodigo: Float!
+}
+
+input HoraTarefaInput {
+  htrTarcodigo: Float
+  htrUsrcodigo: Float!
+  htrClhcodigo: Float
+  htrData: String
+  htrTipo: String
+  htrHoras: Float
+  htrMinutos: Float
+  htrDescricao: String
+  htrStatus: String
+}
+
+input SetorInput {
+  strDesc: String!
+}
+
+input TarefaInput {
+  tarTitulo: String!
+  tarDescricao: String!
+  tarCltcodigo: Float!
+  tarDtHrAbert: DateTime
+  tarStatus: String
+  tarUsrcodigo: Float!
+  tarDtHrFecha: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input UsuarioInput {
+  usrLogin: String!
+  usrNomecompleto: String!
+  usrEmail: String!
+  usrSenha: String!
+  usrStrCodigo: Float!
+  usrDtnascimento: String!
+}

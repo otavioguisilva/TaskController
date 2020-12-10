@@ -1,0 +1,13 @@
+export { default as ClassificaHora } from './classificahora.entity';
+export { default as ClassificaTar } from './classificatar.entity';
+export { default as HoraTarefa } from './horatarefa.entity';
+export { default as ObservacaoTar } from './observacaotar.entity';
+export { default as Setor } from './setor.entity';
+export { default as Tarefa } from './tarefa.entity';
+export { default as Usuario } from './usuario.entity';
+export { default as HoraTarefaAut } from './horatarefaaut.entity';
+export { default as Cep } from './cep.entity';
+export { default as Cliente } from './cliente.entity';
+export { default as ContatoCli } from './contatoCli.entity';
+export { default as Endereco } from './endereco.entity';
+export { default as GrupoCliente } from './grupocliente.entity';
