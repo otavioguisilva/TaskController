@@ -29,6 +29,7 @@ const Home = ({ history }) => {
     const [ messageErro , setMessageErro ] = useState('');
     let usuario = {};
     let erro;
+    let msgErro
 
 
     const [loginUsuario] = useMutation(LOGIN_USUARIO, 
@@ -47,9 +48,15 @@ const Home = ({ history }) => {
         .catch((error) => {
             setMessageErro(`* ${error.message}`);
             erro = true;
+            msgErro = error.message;
+            if (msgErro.includes('Senha')) {
+                setInputS('');    
+            } else {
+            setInput('');
+            setInputS('');
+        }
         })
         if (!erro) {
-        console.log(usuario);
         setInput('');
         setInputS('');
         await setToken(usuario);
