@@ -61,6 +61,7 @@ const Home = ({ history }) => {
         setInput('');
         setInputS('');
         await setToken(usuario);
+        await localStorage.setItem("usrCaminhoFoto",usuario.usrCaminhoFoto)
         window.location.href = `/home`
         }
         

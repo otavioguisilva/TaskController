@@ -16,13 +16,12 @@ mutation($caminhoFoto: String!, $usrId: Float!){
 
 const PagePerfil = () => {
     const tokenusr = JSON.parse(localStorage.getItem('token'));
-    const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
-    const realRandomName = randomName.substr(1,32);
     const usuario = tokenusr.usrCodigo + tokenusr.usrLogin;
-    const nomeFotousr = realRandomName + tokenusr.usrCodigo + tokenusr.usrLogin + '.jpg';
+    let nomeFotousr =  tokenusr.usrCodigo + tokenusr.usrLogin;
     const values = useRef({
         file : false,
     })
+    let usuarioCFoto = {};
 
     const [alteraFotoUsuario] = useMutation(ALTERA_FOTO_USUARIO, 
         {
@@ -40,16 +39,20 @@ const PagePerfil = () => {
             return false;
         }
         let formData = new FormData();
-        console.log(values.current.file)
-        formData.append("foto", values.current.file,nomeFotousr)
-        
+        await formData.append("foto", values.current.file,usuario)
+        nomeFotousr = nomeFotousr + '.' + values.current.file.type.substr(6)
+        await alteraFotoUsuario({variables: {caminhoFoto: usuario+"/" +nomeFotousr, usrId: tokenusr.usrCodigo} })
+        .then (async ({data}) => {
+            usuarioCFoto = data.alteraFotoUsuario
+            await localStorage.removeItem("usrCaminhoFoto");
+            await localStorage.setItem("usrCaminhoFoto",usuarioCFoto.usrCaminhoFoto)
+        })
 
         try {
-            const response = await fetch('http://localhost:8081/upload/upload', {
+            const response = await fetch('http://192.168.0.27:8081/upload/upload', {
               method: 'POST',
               body: formData,
             });
-      
             if (!response.ok) {
               throw new Error(response.statusText);
             }
@@ -58,9 +61,6 @@ const PagePerfil = () => {
           } catch (err) {
             console.log(err);
           }
-
-        
-        await alteraFotoUsuario ({variables: {caminhoFoto: usuario+"/" +nomeFotousr, usrId: tokenusr.usrCodigo} })
     }
     
 

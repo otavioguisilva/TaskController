@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Hexagono1, HexagonoPerfil, Perfil } from '../styles';
 
 let userFoto ;
-const jsonUserFoto = JSON.parse(localStorage.getItem('token'));
-if (jsonUserFoto !== null) {
-   userFoto = jsonUserFoto.usrCaminhoFoto;
+const usrCaminhoFoto = localStorage.getItem('usrCaminhoFoto');
+if (usrCaminhoFoto !== null) {
+   userFoto = usrCaminhoFoto;
 }
 
 
