@@ -14,6 +14,8 @@ import {
     ClassificaTarResolver,
     ClassificaHoraResolver,
 } from './resolvers/resolvers';
+import { UploadController } from './upload/upload.controller';
+import { UploadModule } from './upload/upload.module';
 
 const gqlImports = [
     SetorResolver,
@@ -34,8 +36,9 @@ const gqlImports = [
             autoSchemaFile: 'schema.gql',
             playground: true,
         }),
+        UploadModule,
     ],
-    controllers: [AppController],
+    controllers: [AppController, UploadController],
     providers: [AppService],
 })
 export class AppModule {}
