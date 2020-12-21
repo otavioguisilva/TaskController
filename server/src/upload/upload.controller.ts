@@ -9,13 +9,13 @@ export class UploadController {
         FileInterceptor('foto', {
             storage: diskStorage({
                 destination: (req, file, cb) => {
-                    const dirName = file.originalname;
+                    const dirName = file.originalname.substring(32, file.originalname.length - 4);
                     const originalDir = `../web/public/fotos/perfil/`;
+                    console.log(dirName);
                     cb(null, originalDir + dirName);
                 },
                 filename: (req, file, cb) => {
-                    const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
-                    cb(null, `${randomName}${file.originalname}.jpg`);
+                    cb(null, `${file.originalname}`);
                 },
             }),
         }),

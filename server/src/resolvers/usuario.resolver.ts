@@ -61,6 +61,19 @@ class UsuarioResolver {
         });
     }
 
+    @Mutation(() => Usuario)
+    public async alteraFotoUsuario(@Args('caminhoFoto') caminhoFoto: string, @Args('usrId') usrId: number): Promise<Usuario> {
+        const caminhoFinalFoto = `../../fotos/perfil/${caminhoFoto}`;
+        const alteraFoto = await this.repoService.usuarioRepo
+            .createQueryBuilder('AlteraFoto')
+            .update('usuario')
+            .set({ usrCaminhoFoto: caminhoFinalFoto })
+            .where(`usr_codigo = ${usrId}`)
+            .execute();
+        const resultado = alteraFoto.generatedMaps[0];
+        return this.repoService.usuarioRepo.findOne(resultado);
+    }
+
     //PARA NÃO CRIAR UMA BUSCA POR ID E OUTRA NORMAL CRIEI ESSE METODO QUE SE ADAPTA AO QUE O FRONT-END MANDAR
     @Query(() => [Usuario])
     public async buscaUsuario(@Args('campo') campo: string, @Args('valorCampo') valorCampo: string): Promise<Usuario[]> {

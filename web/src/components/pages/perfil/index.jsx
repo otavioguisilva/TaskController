@@ -2,15 +2,34 @@ import { UploadBtn } from '../../botoes/styles';
 import React, { useRef } from 'react';
 import PageDefault from '../../pagedefault'
 import { TrocaImagemPerfil } from './styles'
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/react-hooks';
 
-
+export const ALTERA_FOTO_USUARIO = gql`
+mutation($caminhoFoto: String!, $usrId: Float!){
+    alteraFotoUsuario(caminhoFoto: $caminhoFoto, usrId: $usrId)
+    {
+      usrCaminhoFoto
+    }
+}
+`;
 
 const PagePerfil = () => {
-    const tokenusr = JSON.parse(localStorage.getItem('token'))
-    const nomeFotousr = tokenusr.usrCodigo + tokenusr.usrLogin;
+    const tokenusr = JSON.parse(localStorage.getItem('token'));
+    const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+    const realRandomName = randomName.substr(1,32);
+    const usuario = tokenusr.usrCodigo + tokenusr.usrLogin;
+    const nomeFotousr = realRandomName + tokenusr.usrCodigo + tokenusr.usrLogin + '.jpg';
     const values = useRef({
         file : false,
     })
+
+    const [alteraFotoUsuario] = useMutation(ALTERA_FOTO_USUARIO, 
+        {
+            onCompleted({alteraFotoUsuario}) {
+            }
+        }
+    );
 
     const onFileChange = (e) => {
         values.current.file = e.target.files[0]
@@ -39,6 +58,9 @@ const PagePerfil = () => {
           } catch (err) {
             console.log(err);
           }
+
+        
+        await alteraFotoUsuario ({variables: {caminhoFoto: usuario+"/" +nomeFotousr, usrId: tokenusr.usrCodigo} })
     }
     
 
