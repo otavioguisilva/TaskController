@@ -2,7 +2,7 @@ import { UploadBtn } from '../../botoes/styles';
 import React, { useState } from 'react';
 import PageDefault from '../../pagedefault'
 import { TrocaImagemPerfil } from './styles'
-import axios from 'axios'
+//import axios from 'axios'
 
 const PagePerfil = () => {
     const [ selectedFile, setSelectedFile ] = useState(null)
