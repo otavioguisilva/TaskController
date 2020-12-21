@@ -1,9 +1,5 @@
 {
     "compilerOptions": {
       "baseUrl": "./src",
-      "paths": {
-        "example/*": ["example/src/*"],
-        "@empresa/*": ["components/*"]
-      }
     }
   }

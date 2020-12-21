@@ -177,7 +177,7 @@ export const MenuBaixo = styled.div`
 
 export const Perfil = styled.div`
     border-top:solid, #fff , 20px;
-    background-size: 160%;
+    background-size: 120%;
     background-color: ${brilho(corHexa, 0)};
     background-position: center;
     width: 100%;

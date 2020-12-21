@@ -3,6 +3,8 @@ import '../../Formatacao.css';
 import { Link } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
+import { CadBtn, DivCadBtn, DivLinkVoltar } from '../../login/styles';
+
 
 const INSERE_USUARIO = gql`
     mutation($usrLogin: String!,
@@ -160,21 +162,16 @@ const PageCadUsr = ({history}) => {
                                 {data?.allSetores.map(item => (
                                     <option value={item.strCodigo}>{item.strDescricao}</option>
                                 ))}
-                            </select>
-                            
-                            
+                            </select>                                   
+                            <DivCadBtn>
+                                <CadBtn as="input" type="submit" onClick={cadastraUsuario} value="Cadastrar" className="btn float-right login_btn"/>
+                            </DivCadBtn>
+                            <DivLinkVoltar>
+                                <div className="d-flex justify-content-center links">
+                                    Voltar para tela de <Link to="/">Login</Link>
+                                </div>
+                            </DivLinkVoltar>
                         </div>
-                        <br/>
-                        
-                        <div className="form-group">
-                            <input type="submit" onClick={cadastraUsuario} value="Cadastrar" className="btn float-right login_btn"/>
-                        </div>
-                        <div className="d-flex justify-content-center links">
-                            Voltar para tela de <Link to="/">Login</Link>
-                            
-                        </div>
-                        
-                        
                     </form>
                 </div>
 

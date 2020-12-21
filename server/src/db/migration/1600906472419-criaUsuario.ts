@@ -49,6 +49,7 @@ export class criaUsuario1600906472419 implements MigrationInterface {
                 type: 'varchar',
                 length: '255',
                 isUnique: true,
+                isNullable:true,
                 default: '" "',
             },
         ],
