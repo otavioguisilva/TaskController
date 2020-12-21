@@ -3,7 +3,12 @@ import React, { useRef } from 'react';
 import PageDefault from '../../pagedefault'
 import { TrocaImagemPerfil } from './styles'
 
+
+
 const PagePerfil = () => {
+    const tokenusr = JSON.parse(localStorage.getItem('token'))
+    const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
+    const nomeFotousr = randomName + tokenusr.usrCodigo + tokenusr.usrLogin + ".jpg";
     const values = useRef({
         file : false,
     })
@@ -18,7 +23,7 @@ const PagePerfil = () => {
         }
         let formData = new FormData();
         console.log(values.current.file)
-        formData.append("foto", values.current.file,values.current.file.name)
+        formData.append("foto", values.current.file,nomeFotousr)
         
 
         try {

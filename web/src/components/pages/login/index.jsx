@@ -12,6 +12,7 @@ mutation($loginOrEmail: String!, $senha: String!){
     loginUsuario(loginOrEmail: $loginOrEmail, senha: $senha)
     {
       usrCodigo
+      usrLogin
       usrNomecompleto
       usrStrcodigo
       usrCaminhoFoto

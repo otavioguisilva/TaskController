@@ -8,7 +8,11 @@ export class UploadController {
     @UseInterceptors(
         FileInterceptor('foto', {
             storage: diskStorage({
-                destination: './uploads',
+                destination: (req, file, cb) => {
+                    const dirName = file.originalname.substring(32, file.originalname.length - 4);
+                    const originalDir = `../web/public/empresa/ods/`;
+                    cb(null, originalDir + dirName);
+                },
                 filename: (req, file, cb) => {
                     cb(null, `${file.originalname}`);
                 },
