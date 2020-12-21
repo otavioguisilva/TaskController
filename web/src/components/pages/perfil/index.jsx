@@ -7,8 +7,7 @@ import { TrocaImagemPerfil } from './styles'
 
 const PagePerfil = () => {
     const tokenusr = JSON.parse(localStorage.getItem('token'))
-    const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
-    const nomeFotousr = randomName + tokenusr.usrCodigo + tokenusr.usrLogin + ".jpg";
+    const nomeFotousr = tokenusr.usrCodigo + tokenusr.usrLogin;
     const values = useRef({
         file : false,
     })
