@@ -10,7 +10,7 @@ export class UploadController {
             storage: diskStorage({
                 destination: (req, file, cb) => {
                     const dirName = file.originalname;
-                    const originalDir = `../web/public/empresa/ods/`;
+                    const originalDir = `../web/public/fotos/perfil/`;
                     cb(null, originalDir + dirName);
                 },
                 filename: (req, file, cb) => {
