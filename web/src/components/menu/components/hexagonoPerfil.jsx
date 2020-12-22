@@ -14,7 +14,7 @@ if (usrCaminhoFoto !== null) {
     return (
         <HexagonoPerfil as={Link} to="/perfil">
           <Hexagono1>
-            <Perfil foto={`"${userFoto}"`}/>
+            <Perfil as="img" src={userFoto}/>
           </Hexagono1>
         </HexagonoPerfil>
     )

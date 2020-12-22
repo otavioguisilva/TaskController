@@ -176,15 +176,15 @@ export const MenuBaixo = styled.div`
 `
 
 export const Perfil = styled.div`
+    display: flex;
     border-top:solid, #fff , 20px;
-    background-size: 120%;
+    background-size: 100%;
     background-color: ${brilho(corHexa, 0)};
     background-position: center;
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;
     background-position: 50%;
-    background-image: url(${props => props.foto});
     visibility: visible;
     -webkit-transform: rotate(-60deg);
     -moz-transform: rotate(-60deg);

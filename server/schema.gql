@@ -85,6 +85,7 @@ type Mutation {
   insereTarefa(data: TarefaInput!): Tarefa!
   excutaTarefa(tarcodigo: Float!): Tarefa!
   loginUsuario(senha: String!, loginOrEmail: String!): Usuario
+  alteraFotoUsuario(usrId: Float!, caminhoFoto: String!): Usuario!
   insereUsuario(datas: UsuarioInput!): Usuario!
 }
 
