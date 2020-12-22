@@ -214,3 +214,9 @@ height: 175px;
 margin: 0 0 0 20px;
 top:-10px;
 `
+
+export const ImagemPerfil = styled.img`
+overflow: hidden;
+width:300px;
+height:250px;
+`

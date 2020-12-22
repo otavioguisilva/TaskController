@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Hexagono1, HexagonoPerfil, Perfil } from '../styles';
+import { Hexagono1, HexagonoPerfil, Perfil, ImagemPerfil } from '../styles';
 
 let userFoto ;
 const usrCaminhoFoto = localStorage.getItem('usrCaminhoFoto');
@@ -14,7 +14,9 @@ if (usrCaminhoFoto !== null) {
     return (
         <HexagonoPerfil as={Link} to="/perfil">
           <Hexagono1>
-            <Perfil as="img" src={userFoto}/>
+            <Perfil>
+              <ImagemPerfil  src={userFoto} />
+            </Perfil>
           </Hexagono1>
         </HexagonoPerfil>
     )
