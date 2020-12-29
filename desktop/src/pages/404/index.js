@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import PageDefault from '../pagedefault'
 
 const H1404 =styled.div`
     justify-content:center;
@@ -21,13 +20,11 @@ const H1404 =styled.div`
 
 const Page404 = () => {
     return(
-            <PageDefault>
             <H1404 ><h1>Erro 404 <br/> Página não encontrada</h1>
             <div className="d-flex justify-content-center links">
             Voltar para a <Link to="/">Página Principal</Link>
             </div>
             </H1404>
-            </PageDefault>
     )
 }
 

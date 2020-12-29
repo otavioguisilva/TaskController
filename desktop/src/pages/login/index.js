@@ -3,6 +3,7 @@ import { ErrorMessage, DivLoginBtn, LoginBtn } from './styles';
 import { Link } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
+import history from '../../services/history'
 
 export const LOGIN_USUARIO = gql`
 mutation($loginOrEmail: String!, $senha: String!){
@@ -61,7 +62,7 @@ const Home = () => {
         //await setToken(usuario);
         await localStorage.setItem("token", usuario.usrCodigo)
         await localStorage.setItem("usrCaminhoFoto",usuario.usrCaminhoFoto)
-       // window.location.href = `/home`
+        history.push(`/home`)
         }
         
     }
@@ -117,7 +118,7 @@ const Home = () => {
                 </div>
                 <div className="card-footer">
                     <div className="d-flex justify-content-center links">
-                        Não tem conta?<Link to="/404">Cadastre-se</Link>
+                        Não tem conta?<Link to="/home">Cadastre-se</Link>
                     </div>
                 </div>
             </div>
