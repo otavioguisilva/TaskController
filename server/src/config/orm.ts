@@ -9,7 +9,7 @@ const options: TypeOrmModuleOptions = {
     username: 'root',
     password: '@kalunga123',
     synchronize: false,
-    host: '179.221.167.201',
+    host: 'localhost',
     entities: [path.resolve(__dirname, '..', 'db', 'entity', '*')],
     migrations: [path.resolve(__dirname, '..', 'db', 'migration', '*')],
     subscribers: [path.resolve(__dirname, '..', 'db', 'subscriber', '*')],

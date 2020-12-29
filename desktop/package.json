@@ -1,0 +1,84 @@
+{
+  "name": "Taskcontroller",
+  "version": "1.0.0",
+  "main": "app/main.js",
+  "scripts": {
+    "postinstall": "install-app-deps",
+    "build": "gulp build",
+    "start": "gulp",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author":{
+    "name": "ODS Soluções Técnologicas"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-jest": "^26.6.3",
+    "electron": "^11.1.1",
+    "electron-builder": "^22.9.1",
+    "electron-react-devtools": "^0.5.3",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-livereload": "^4.0.2"
+  },
+  "dependencies": {
+    "@apollo/react-hooks": "^4.0.0",
+    "@babel/polyfill": "^7.12.1",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/styles": "^4.11.2",
+    "@types/material-ui": "^0.21.8",
+    "apollo-boost": "^0.4.9",
+    "apollo-client": "^2.6.10",
+    "electron-is-dev": "^1.2.0",
+    "graphql": "^15.4.0",
+    "graphql-tag": "^2.11.0",
+    "ini": "^2.0.0",
+    "material-ui": "^0.20.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.2.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "build": {
+    "productName": "TaskController",
+    "appId": "com.ods.taskcontroller",
+    "linux": {
+      "target": [
+        "dir"
+      ]
+    },
+    "win": {
+      "asar": false,
+      "target": "nsis",
+      "icon": "src/icons/logo.ico"
+    },
+    "nsis": {
+      "installerIcon": "src/icons/logo.ico",
+      "installerHeaderIcon": "src/icons/logo.ico",
+      "deleteAppDataOnUninstall": true
+    },
+    "mac": {
+      "category": "your.app.category.type"
+    }
+  }
+}
