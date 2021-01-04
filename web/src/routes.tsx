@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import './components/pages/Formatacao.css'
+import './pages/Formatacao.css'
 import RoutesPrivate from './private'
-import PageTeste from './components/pages/pageteste';
-import { Tarefa, Cliente, Classificacao, Setor, HomePage, Login, PagePerfil, PageCadUsr, Sucesso } from './components/pages/pages'
+import PageTeste from './pages/pageteste';
+import { Tarefa, Cliente, Classificacao, Setor, HomePage, Login, PagePerfil, PageCadUsr, Sucesso } from './pages/pages'
 
 export default function Routes() {
     return (
