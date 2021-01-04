@@ -18,7 +18,6 @@ mutation($caminhoFoto: String!, $usrId: Float!){
 
 const PagePerfil = () => {
     const [ imgNova, setImgNova ] = useState('')
-    let nomeFotousr;
     let novoBlob;
     const [ novaFoto, setNovaFoto ] = useState('');
     const [croppie, setCroppie] = useState(null);
@@ -34,9 +33,8 @@ const PagePerfil = () => {
           const croppieInstance = new Croppie(el, {
             enableExif: true,
             viewport: {
-                width: 320,
-                height: 285,
-              
+              height: 320,
+              width: 285,
             },
             boundary: {
                 height: 290,
@@ -65,7 +63,6 @@ const PagePerfil = () => {
             if(e.target.files && e.target.files[0]){
                 const reader = new FileReader();
                 reader.onload = function(ev){
-                    setNovaFoto({imageURI:ev.target.result});
                     handleImage(ev.target.result)
                 }
                 reader.readAsDataURL(e.target.files[0]);
@@ -82,13 +79,10 @@ const PagePerfil = () => {
         }
         croppie.result({type: 'base64',
         }).then(async (blob) => {
-        nomeFotousr = values.current.file.type.substr(6);
-        if (nomeFotousr.match('gif')) {
-            novoBlob = imgNova
-            console.log("ok",novoBlob);
-        } else {
-            novoBlob = blob.replace("image/png", values.current.file.type);
-        }
+        console.log(blob);
+        novoBlob = blob.replace("image/png", values.current.file.type);
+        console.log(novoBlob);
+        console.log(values.current.file)
         let formData = new FormData();
         await formData.append("foto", values.current.file,usuario);
         await alteraFotoUsuario({variables: {caminhoFoto: novoBlob, usrId: tokenusr.usrCodigo} })
@@ -112,12 +106,6 @@ const PagePerfil = () => {
         }
         )   
     }
-
-    useEffect(() => {
-        if (novaFoto) {
-            setImgNova(novaFoto.imageURI)
-        }
-    }, [novaFoto])
     
 
     return(

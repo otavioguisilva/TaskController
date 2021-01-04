@@ -16,8 +16,10 @@ export const DivTrocaImagem = styled.div `
 `
 
 export const ImgPerfil = styled.img`
+    overflow: hidden;
     width:125px;
     height:175px;
+    background-color:blue;
 `
 
 export const HexagonoTroca = styled.div`

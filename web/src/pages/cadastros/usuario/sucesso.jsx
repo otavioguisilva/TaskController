@@ -1,5 +1,5 @@
 import React from 'react';
-import carregando from '../../../img/carregando.gif'
+import carregando from '../img/carregando.gif'
 
 
 const Sucesso = ({history}) => {
