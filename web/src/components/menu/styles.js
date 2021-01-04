@@ -217,6 +217,4 @@ top:-10px;
 
 export const ImagemPerfil = styled.img`
 overflow: hidden;
-width:300px;
-height:250px;
 `

@@ -38,7 +38,7 @@ export default class Usuario {
     usrDtnascimento: string;
 
     @Field()
-    @Column({ name: 'usr_caminhofoto', nullable: true })
+    @Column({ type:'blob', name: 'usr_caminhofoto', nullable: true })
     usrCaminhoFoto: string;
 
     //Associações

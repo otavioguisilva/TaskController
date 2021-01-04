@@ -2,7 +2,6 @@ import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/g
 import { Tarefa, ClassificaHora, HoraTarefa } from 'src/db/entity/entities';
 import { HoraTarefaInput } from 'src/resolvers/input/input';
 import RepoService from 'src/repo.service';
-import { Like } from 'typeorm';
 
 @Resolver(() => HoraTarefa)
 class HoraTarefaResolver {
@@ -57,7 +56,7 @@ class HoraTarefaResolver {
             .execute();
 
         const resultado = novaHora.generatedMaps[0];
-        const novaHoraAut = await this.repoService.horatarefaautRepo
+        await this.repoService.horatarefaautRepo
             .createQueryBuilder('HoraTarefaAut')
             .insert()
             .values({
@@ -84,7 +83,7 @@ class HoraTarefaResolver {
         } else {
             const resultBuscaHora: any = Object.values(buscaHora[0]);
             const horaCodigo = resultBuscaHora.toString();
-            const finalizaHoraAut = await this.repoService.horatarefaautRepo
+            await this.repoService.horatarefaautRepo
                 .createQueryBuilder()
                 .update('horatarefaaut')
                 .set({
@@ -101,7 +100,7 @@ class HoraTarefaResolver {
             const split: any = resultBuscaHrMn.toString().split(':', 2);
             const valorHora = split[0];
             const valorMinuto = split[1];
-            const finalizaHora = await this.repoService.horatarefaRepo
+            await this.repoService.horatarefaRepo
                 .createQueryBuilder('finalizahora')
                 .update('horatarefa')
                 .set({

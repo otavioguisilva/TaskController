@@ -3,7 +3,6 @@ import { ErrorMessage, DivLoginBtn, LoginBtn } from './styles';
 import { Link } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import history from '../../services/history'
 
 export const LOGIN_USUARIO = gql`
 mutation($loginOrEmail: String!, $senha: String!){
@@ -21,9 +20,7 @@ mutation($loginOrEmail: String!, $senha: String!){
   }
 `;
 
-
-
-const Home = () => {
+const Home = ({ history }) => {
     const [ input, setInput ] = useState('');
     const [ inputS, setInputS ] = useState('');
     const [ messageErro , setMessageErro ] = useState('');
@@ -59,25 +56,12 @@ const Home = () => {
         if (!erro) {
         setInput('');
         setInputS('');
-        //await setToken(usuario);
-        await localStorage.setItem("token", usuario.usrCodigo)
+        await localStorage.setItem("token", JSON.stringify(usuario));
         await localStorage.setItem("usrCaminhoFoto",usuario.usrCaminhoFoto)
         history.push(`/home`)
         }
         
     }
-
-   /*  function verificaCampos(e) {
-        e.preventDefault();
-        if (input == '') {
-            setMessageErro("* Usuario / Email não preenchido")
-            return
-        }
-        if (inputS == '') {
-            setMessageErro("* Senha não preenchida")
-            return
-        }
-    } */
 
   return (
     <div className="container">
@@ -118,7 +102,7 @@ const Home = () => {
                 </div>
                 <div className="card-footer">
                     <div className="d-flex justify-content-center links">
-                        Não tem conta?<Link to="/home">Cadastre-se</Link>
+                        Não tem conta?<Link to="/hehehe">Cadastre-se</Link>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import PageDefault from '../../components/PageDefault'
 
 
-const HomePage = () => {
+const HomePage = ({history}) => {
 
     return (
             <PageDefault>

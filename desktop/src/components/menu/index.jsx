@@ -4,7 +4,7 @@ import Hexa from './components/hexagono';
 import HexaPerfil from './components/hexagonoPerfil'
 
 
-const Menu = () =>  {
+const Menu = ({history}) =>  {
     return (
       <MenuNav>
         <HexaPerfil/>

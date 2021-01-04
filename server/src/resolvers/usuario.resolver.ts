@@ -1,8 +1,11 @@
-import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Parent, Query, ResolveField, Resolver, Subscription } from '@nestjs/graphql';
 import { Usuario, Setor } from 'src/db/entity/entities';
 import { UsuarioInput } from 'src/resolvers/input/input';
 import RepoService from 'src/repo.service';
 import encryptaSenha from 'src/components/encryptasenha';
+import { PubSub } from 'graphql-subscriptions'
+
+export const pubSub = new PubSub ()
 
 @Resolver(() => Usuario)
 class UsuarioResolver {
@@ -31,16 +34,19 @@ class UsuarioResolver {
             if (!getUser) throw new Error('Usuário não encontrado');
         }
         //PEGA AS INFORMAÇÕES DE LOGIN E SENHA DO USUARIO PEGO ANTERIORMENTE
-        let loginUsr = await getUser.usrLogin;
-        let senhaUsr = await getUser.usrSenha;
-        let senhaEncrypt = encryptaSenha(senha, loginUsr);
+        const loginUsr = await getUser.usrLogin;
+        const senhaUsr = await getUser.usrSenha;
+        const senhaEncrypt = encryptaSenha(senha, loginUsr);
         if (senhaEncrypt === senhaUsr) {
-            return await this.repoService.usuarioRepo.findOne({
+            const usuario = await this.repoService.usuarioRepo.findOne({
                 where: {
                     usrLogin: loginUsr,
                     usrSenha: senhaUsr,
                 },
-            });
+            })
+            usuario.usrCaminhoFoto = Buffer.from(usuario.usrCaminhoFoto).toString();
+            return usuario;
+            ;
         } else {
             throw new Error('Senha inválida');
         }
@@ -53,25 +59,29 @@ class UsuarioResolver {
 
     @Query(() => Usuario)
     public async getFotoUsuario(@Args('usrId') usrId: number): Promise<Usuario> {
-        return this.repoService.usuarioRepo.findOne({
+        const usuario = await this.repoService.usuarioRepo.findOne({
             select: ['usrCaminhoFoto'],
             where: {
                 usrCodigo: usrId,
             },
         });
+        usuario.usrCaminhoFoto = Buffer.from(usuario.usrCaminhoFoto).toString('base64');
+        return usuario;
     }
 
     @Mutation(() => Usuario)
     public async alteraFotoUsuario(@Args('caminhoFoto') caminhoFoto: string, @Args('usrId') usrId: number): Promise<Usuario> {
-        const caminhoFinalFoto = `../../fotos/perfil/${caminhoFoto}`;
         const alteraFoto = await this.repoService.usuarioRepo
             .createQueryBuilder('AlteraFoto')
             .update('usuario')
-            .set({ usrCaminhoFoto: caminhoFinalFoto })
+            .set({ usrCaminhoFoto: caminhoFoto })
             .where(`usr_codigo = ${usrId}`)
             .execute();
         const resultado = alteraFoto.generatedMaps[0];
-        return this.repoService.usuarioRepo.findOne(resultado);
+        const novaFoto = await this.repoService.usuarioRepo.findOne(resultado);
+        novaFoto.usrCaminhoFoto = Buffer.from(novaFoto.usrCaminhoFoto).toString('base64');
+        pubSub.publish('caminhoAlterado', { caminhoAlterado: novaFoto})
+        return novaFoto;
     }
 
     //PARA NÃO CRIAR UMA BUSCA POR ID E OUTRA NORMAL CRIEI ESSE METODO QUE SE ADAPTA AO QUE O FRONT-END MANDAR
@@ -80,14 +90,14 @@ class UsuarioResolver {
         let isNumerico: boolean;
         campo.toUpperCase().includes('CODIGO') ? (isNumerico = true) : (isNumerico = false);
         if (isNumerico) {
-            let campoCorreto = 'usr_' + campo.toLowerCase();
-            let valorCorreto = Number(valorCampo);
+            const campoCorreto = 'usr_' + campo.toLowerCase();
+            const valorCorreto = Number(valorCampo);
             return this.repoService.usuarioRepo
                 .createQueryBuilder('Usuario')
                 .where(`${campoCorreto} = ${valorCorreto}`)
                 .getMany();
         } else {
-            let campoCorreto = 'usr_' + campo.toLowerCase();
+            const campoCorreto = 'usr_' + campo.toLowerCase();
             return this.repoService.usuarioRepo
                 .createQueryBuilder('Usuario')
                 .where(`${campoCorreto} like "%${valorCampo}%"`)
@@ -98,24 +108,24 @@ class UsuarioResolver {
     @Mutation(() => Usuario)
     public async insereUsuario(@Args('datas') input: UsuarioInput): Promise<Usuario> {
         //VERIFICA SE JÁ EXISTE USUARIO COM ESSE LOGIN CADASTRADO
-        let buscaLogin = await this.repoService.usuarioRepo.find({
+        const buscaLogin = await this.repoService.usuarioRepo.find({
             usrLogin: input.usrLogin,
         });
-        let existeLogin = JSON.stringify(buscaLogin);
+        const existeLogin = JSON.stringify(buscaLogin);
         if (existeLogin !== '[]') {
-            let err = 'Login já existente';
+            const err = 'Login já existente';
             throw new Error(err);
         }
         //VERIFICA SE JÁ EXISTE EMAIL CADASTRADO
-        let buscaEmail = await this.repoService.usuarioRepo.find({
+        const buscaEmail = await this.repoService.usuarioRepo.find({
             usrEmail: input.usrEmail,
         });
-        let existeEmail = JSON.stringify(buscaEmail);
+        const existeEmail = JSON.stringify(buscaEmail);
         if (existeEmail !== '[]') {
-            let err = 'Email já cadastrado para outro usuário';
+            const err = 'Email já cadastrado para outro usuário';
             throw new Error(err);
         }
-        let novoUsuario = new Usuario();
+        const novoUsuario = new Usuario();
         novoUsuario.usrEmail = input.usrEmail.toLowerCase().trim();
         novoUsuario.usrLogin = input.usrLogin.toUpperCase().trim();
         novoUsuario.usrNomecompleto = input.usrNomecompleto;
@@ -124,7 +134,12 @@ class UsuarioResolver {
         novoUsuario.usrDtnascimento = input.usrDtnascimento;
         return this.repoService.usuarioRepo.save(novoUsuario);
     }
-
+    
+    @Subscription(() => Usuario)
+    caminhoAlterado() {
+        return pubSub.asyncIterator('caminhoAlterado')
+    }
+    
     @ResolveField(() => Setor, { name: 'setor' })
     public async getSetor(@Parent() parent: Usuario): Promise<Setor> {
         return this.repoService.setorRepo.findOne({

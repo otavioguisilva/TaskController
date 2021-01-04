@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -14,8 +14,8 @@ import {
     ClassificaTarResolver,
     ClassificaHoraResolver,
 } from './resolvers/resolvers';
-import { UploadController } from './upload/upload.controller';
-import { UploadModule } from './upload/upload.module';
+import { UploadController } from './upload.controller';
+import { UploadModule } from './upload.module';
 
 const gqlImports = [
     SetorResolver,
@@ -33,6 +33,7 @@ const gqlImports = [
         RepoModule,
         ...gqlImports,
         GraphQLModule.forRoot({
+            installSubscriptionHandlers: true,
             autoSchemaFile: 'schema.gql',
             playground: true,
         }),

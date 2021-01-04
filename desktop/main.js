@@ -26,8 +26,10 @@ exports.execProcess = (process, callback) => {
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
+    show: false,
     width: 800,
     height: 600,
+    backgroundColor: '#BBBBBA',
     icon: path.join(__dirname,  'icons/favicon.icns'),
     // Caracteristicas visuais da janela
     // autoHideMenuBar: true,
@@ -39,7 +41,7 @@ const createWindow = () => {
       nodeIntegration: true
     }
   });
-  //mainWindow.removeMenu();
+  mainWindow.maximize();
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),

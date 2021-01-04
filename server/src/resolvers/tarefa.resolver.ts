@@ -1,8 +1,8 @@
 import { Args, Mutation, Query, Resolver, Parent, ResolveField } from '@nestjs/graphql';
 import { ClassificaTar, Tarefa, Usuario } from 'src/db/entity/entities';
-import { ClassificaTarInput, TarefaInput } from 'src/resolvers/input/input';
+import { TarefaInput } from 'src/resolvers/input/input';
 import RepoService from 'src/repo.service';
-import { createQueryBuilder, DeepPartial, Like } from 'typeorm';
+
 
 @Resolver(() => Tarefa)
 class TarefaResolver {

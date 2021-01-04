@@ -43,9 +43,9 @@ class SetorResolver {
         );
         const resultUltimoCodigo: string = JSON.stringify(Object.values(queryUltimoCodigo[0]));
         const regExp = /[0-9]/;
-        let stringUltimoCodigo: string = '';
+        let stringUltimoCodigo = '';
         for (let i = 0; i < resultUltimoCodigo.length; i++) {
-            let isNumero = resultUltimoCodigo[i];
+            const isNumero = resultUltimoCodigo[i];
             if (isNumero.match(regExp)) {
                 stringUltimoCodigo = stringUltimoCodigo + isNumero;
             }
@@ -56,7 +56,7 @@ class SetorResolver {
             strDescricao: input.strDesc,
         });
         if (JSON.stringify(existeSetor) !== '[]') {
-            let err = 'Setor Já Cadastrado';
+            const err = 'Setor Já Cadastrado';
             throw new Error(err);
         }
         const novoSetor = new Setor();

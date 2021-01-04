@@ -138,3 +138,7 @@ input UsuarioInput {
   usrStrCodigo: Float!
   usrDtnascimento: String!
 }
+
+type Subscription {
+  caminhoAlterado: Usuario!
+}

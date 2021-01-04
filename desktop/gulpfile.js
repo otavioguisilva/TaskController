@@ -31,14 +31,22 @@ gulp.task('js', () => {
          .pipe(livereload());
 });
 
+gulp.task('jsx', () => {
+    return gulp.src(['src/**/*.jsx'])
+         .pipe(babel())
+         .pipe(gulp.dest('app/'))
+         .pipe(livereload());
+});
+
 gulp.task('watch', async function() {
   livereload.listen();
   gulp.watch('src/**/*.html', gulp.series('html'));
   gulp.watch('src/**/*.css', gulp.series('css'));
   gulp.watch('src/**/*.js', gulp.series('js'));
+  gulp.watch('src/**/*.jsx', gulp.series('jsx'));
 });
 
-gulp.task('build', gulp.series('copy', 'html', 'css', 'js'));
+gulp.task('build', gulp.series('copy', 'html', 'css', 'js', 'jsx'));
 
 gulp.task('start', gulp.series('build', () => {
     return exec(
