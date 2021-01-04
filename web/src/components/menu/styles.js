@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { imgTarefa, imgClientes, imgClassificacao, imgSetor } from '../img/imagens'
+import { imgTarefa, imgClientes, imgClassificacao, imgSetor } from './components/img/imagens'
 
 const corHexa = '00a2e8';
 
