@@ -1,8 +1,5 @@
 node_modules
 dist
 yarn-error.log
-*.jpg
-*.gif
 *.gql
-*.jpeg
-*.png
+
