@@ -32,10 +32,11 @@ const PagePerfil = () => {
         const el = document.getElementById("imagemPerfil")
         if (el) {
           const croppieInstance = new Croppie(el, {
-            enableExif: true,
+            enableExif: false,
+            rotation: false,
             viewport: {
-                width: 320,
-                height: 285,
+                width: 125,
+                height: 175,
               
             },
             boundary: {
@@ -81,8 +82,13 @@ const PagePerfil = () => {
             return false;
         }
         croppie.result({type: 'base64',
+        enableExif: false,
+        rotation:false,
+        format:'gif'
         }).then(async (blob) => {
-        nomeFotousr = values.current.file.type.substr(6);
+            const teste = croppie.get();
+            console.log(teste)
+        /* nomeFotousr = values.current.file.type.substr(6);
         if (nomeFotousr.match('gif')) {
             novoBlob = imgNova
             console.log("ok",novoBlob);
@@ -108,7 +114,7 @@ const PagePerfil = () => {
             }
           } catch (err) {
             console.log(err);
-          }
+          } */
         }
         )   
     }

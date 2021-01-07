@@ -215,6 +215,10 @@ margin: 0 0 0 20px;
 top:-10px;
 `
 
-export const ImagemPerfil = styled.img`
+export const ImagemPerfil = styled.div`
 overflow: hidden;
+background-image: url(${props => props.url});
+transform: scale(0.419);
+width:125px;
+height: 175px;
 `
