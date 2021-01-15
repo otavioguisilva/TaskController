@@ -145,3 +145,28 @@ margin-left: 4px;
     align-items: center;
 }
 
+svg {
+    margin-top: 2px;
+    height:149px;
+    width: 170px;
+}
+
+.hexaFotoUsr {
+cursor: pointer;
+position: absolute;
+right:20px;
+float:right;
+}
+
+.hexaFotoUsr:hover,
+:focus {
+    filter: brightness(1.20)
+}
+
+.hexaInsereFotoPerfil {
+    z-index:1;
+    height: 149;
+    /* height:294px; */
+    width:  170;
+    /* width: 336px; */
+}

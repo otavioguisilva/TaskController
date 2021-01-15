@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Hexagono1, HexagonoPerfil, Perfil, ImagemPerfil } from '../styles';
+import Hexagon from 'react-hexagon'
 
 let userFoto ;
 const usrCaminhoFoto = localStorage.getItem('usrCaminhoFoto');
@@ -12,13 +11,7 @@ if (usrCaminhoFoto !== null) {
 
  const HexaPerfil = ({history}) =>  {
     return (
-        <HexagonoPerfil as={Link} to="/perfil">
-          <Hexagono1>
-            <Perfil>
-              <ImagemPerfil url={`"${userFoto}"`} />
-            </Perfil>
-          </Hexagono1>
-        </HexagonoPerfil>
+           <Hexagon  flatTop="true" style={{stroke:"black", strokeWidth:7}} backgroundImage={`${userFoto}`} className="hexaFotoUsr" href="/perfil" />    
     )
 }
 

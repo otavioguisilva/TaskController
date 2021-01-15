@@ -201,24 +201,16 @@ export const HexagonoPerfil = styled.div`
 position: absolute;
 right:20px;
 float:right;
-overflow: hidden;
-visibility: hidden;
--webkit-transform: rotate(120deg);
--moz-transform: rotate(120deg);
--ms-transform: rotate(120deg);
--o-transform: rotate(120deg);
-transform: rotate(120deg);
-cursor: pointer;
-width: 125px;
-height: 175px;
-margin: 0 0 0 20px;
-top:-10px;
+&:hover,
+&:focus {
+    filter: brightness(1.20)
+    };
 `
 
 export const ImagemPerfil = styled.div`
 overflow: hidden;
 background-image: url(${props => props.url});
-transform: scale(0.419);
 width:125px;
 height: 175px;
 `
+

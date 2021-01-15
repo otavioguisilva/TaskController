@@ -1,11 +1,12 @@
 import { UploadBtn } from '../../components/botoes/styles';
 import React, { useRef, useState, useEffect } from 'react';
 import PageDefault from '../../components/pagedefault'
-import { TrocaImagemPerfil, DivTrocaImagem, ImgPerfil, HexagonoTroca, HexagonoTroca1 } from './styles'
+import { TrocaImagemPerfil, DivTrocaImagem, DivTrocaFoto } from './styles'
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import Croppie from 'croppie'
-import "croppie/croppie.css"
+import Croppie from 'croppie';
+import "croppie/croppie.css";
+import Hexagon from 'react-hexagon' ;
 
 export const ALTERA_FOTO_USUARIO = gql`
 mutation($caminhoFoto: String!, $usrId: Float!){
@@ -28,22 +29,20 @@ const PagePerfil = () => {
         file : false,
     })
 
-    function handleImage(image) {
-        const el = document.getElementById("imagemPerfil")
+    function handleImage(image,id) {
+        const el = document.getElementById(id)
+        console.log(`"${id}"`)
         if (el) {
           const croppieInstance = new Croppie(el, {
-            enableExif: false,
-            rotation: false,
+            enableExif: true,
+            showZoomer:false,
             viewport: {
-                width: 125,
-                height: 175,
-              
+                width: 168,
+                height: 147,              
             },
             boundary: {
-                height: 290,
-                width: 290
-            },
-            showZoomer: false,
+                width: 336, 
+                height: 294 },
         });
         croppieInstance.bind({
           url: image
@@ -67,7 +66,8 @@ const PagePerfil = () => {
                 const reader = new FileReader();
                 reader.onload = function(ev){
                     setNovaFoto({imageURI:ev.target.result});
-                    handleImage(ev.target.result)
+                    handleImage(ev.target.result, "imagemPerfil")
+                    //handleImage(ev.target.result, "imagenPerfil")
                 }
                 reader.readAsDataURL(e.target.files[0]);
             }
@@ -82,13 +82,9 @@ const PagePerfil = () => {
             return false;
         }
         croppie.result({type: 'base64',
-        enableExif: false,
-        rotation:false,
-        format:'gif'
+        enableExif: true,
         }).then(async (blob) => {
-            const teste = croppie.get();
-            console.log(teste)
-        /* nomeFotousr = values.current.file.type.substr(6);
+        nomeFotousr = values.current.file.type.substr(6);
         if (nomeFotousr.match('gif')) {
             novoBlob = imgNova
             console.log("ok",novoBlob);
@@ -112,33 +108,60 @@ const PagePerfil = () => {
             if (!response.ok) {
               throw new Error(response.statusText);
             }
+            if (response.ok) {
+                window.location.reload()
+            }
           } catch (err) {
             console.log(err);
-          } */
+          } 
         }
         )   
     }
+
+    useEffect(() => {
+        if (Hexagon) {
+            const divHexagon = document.querySelector(".divHexagon");
+            const getHexagon = document.querySelector('.hexaInsereFotoPerfil');
+            getHexagon.style.width = "400px";
+            getHexagon.style.height = "345.3px";
+            divHexagon.style.top = "55%";
+            const getPolygon = document.querySelector('.divHexagon polygon');
+            getPolygon.style.strokeWidth = "243px"
+        }
+    }, [Hexagon])
 
     useEffect(() => {
         if (novaFoto) {
             setImgNova(novaFoto.imageURI)
         }
     }, [novaFoto])
-    
+
+    useEffect(() => {
+        if (document.querySelector(".cr-viewport")) {
+            const viewport = document.querySelector(".cr-viewport");
+            const boundary = document.querySelector(".cr-boundary");
+            const divHexagon = document.querySelector(".divHexagon");
+            divHexagon.style.top = "50%";
+            divHexagon.style.display = "flex";
+            boundary.insertBefore(divHexagon, boundary.firstChild);
+            /* viewport.style.width = "0";
+            viewport.style.height = "0";
+            viewport.style.boxShadow = "0 0 0 0 rgba(0, 0, 0, 0.0)";
+            viewport.style.border = "0px" */
+            viewport.style.opacity = '0'
+        }
+    })
 
     return(
         <PageDefault>
             <DivTrocaImagem>
                 <TrocaImagemPerfil type="file" onChange={(e) => onFileChange(e)} />
-                <div id="imagemPerfil">
-                    
-                </div>
-                <HexagonoTroca>
-                    <HexagonoTroca1>
-                        <ImgPerfil/>
-                    </HexagonoTroca1>
-                </HexagonoTroca>
-                <UploadBtn as="input" type="submit"  value="Upload" onClick={submitForm} />
+                    <div id="imagemPerfil" style={{overflow: "hidden", height:"345.3px", marginTop:"31px", marginLeft:"-3.2px"}}>                
+                    </div>                
+                <DivTrocaFoto className="divHexagon" style={{display:"none"}}>
+                    <Hexagon flatTop="true" style={{stroke:"rgba(0, 0, 0, 0.8)", strokeWidth:"7"}} className="hexaInsereFotoPerfil"  />
+                </DivTrocaFoto>
+                <UploadBtn as="input" type="submit" style={{marginTop:"10px"}}  value="Upload" onClick={submitForm} />
             </DivTrocaImagem>
         </PageDefault>
     )
