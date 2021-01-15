@@ -128,7 +128,7 @@ const PagePerfil = () => {
             const getPolygon = document.querySelector('.divHexagon polygon');
             getPolygon.style.strokeWidth = "243px"
         }
-    }, [Hexagon])
+    }, [])
 
     useEffect(() => {
         if (novaFoto) {
