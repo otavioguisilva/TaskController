@@ -37,8 +37,8 @@ const PagePerfil = () => {
             enableExif: true,
             showZoomer:false,
             viewport: {
-                width: 168,
-                height: 147,              
+                width: 177,
+                height: 153,              
             },
             boundary: {
                 width: 336, 
@@ -82,6 +82,10 @@ const PagePerfil = () => {
             return false;
         }
         croppie.result({type: 'base64',
+        size: {
+            width:177,
+            height:153
+        },
         enableExif: true,
         }).then(async (blob) => {
         nomeFotousr = values.current.file.type.substr(6);

@@ -1,4 +1,5 @@
-import { Controller, Post, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Post, UseInterceptors, UploadedFile, Res, HttpStatus } from '@nestjs/common';
+import {Response} from 'express'
 import { diskStorage } from 'multer';
 import { FileInterceptor } from '@nestjs/platform-express';
 
@@ -21,6 +22,9 @@ export class UploadController {
             }),
         }),
     )
+    create(@Res({passthrough: true}) res: Response ) {
+        res.status(999)
+    }
     uploadSingle(@UploadedFile() file) {
         console.log(file);
     }

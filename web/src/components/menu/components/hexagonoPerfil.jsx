@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Hexagon from 'react-hexagon'
 
 let userFoto ;
@@ -10,8 +10,15 @@ if (usrCaminhoFoto !== null) {
 
 
  const HexaPerfil = ({history}) =>  {
+
+   useEffect(() => {
+      if(Hexagon) {
+         const hexagon = document.querySelector(".hexaFotoUsr").firstChild.firstChild.firstChild;
+         hexagon.x.baseVal.value = 0
+      }
+   })
     return (
-           <Hexagon  flatTop="true" style={{stroke:"black", strokeWidth:7}} backgroundImage={`${userFoto}`} className="hexaFotoUsr" href="/perfil" />    
+           <Hexagon  flatTop="true" style={{stroke:"black", strokeWidth:0, objectFit:"contain"}} backgroundImage={`${userFoto}`} className="hexaFotoUsr" href="/perfil" />    
     )
 }
 

@@ -14,7 +14,7 @@ export const DivTrocaImagem = styled.div `
 export const DivTrocaFoto = styled.div`
     width: 100%;
     z-index:1;
-    left:50.2%;
+    left:49.6%;
     transform:translate(-50%,-50%);
     top:50%;
     position: absolute;
