@@ -15,6 +15,8 @@ import {
     ContatoCli,
     Endereco,
     Cep,
+    Chat,
+    ChatMensagem
 } from './db/entity/entities';
 
 @Injectable()
@@ -33,6 +35,8 @@ class RepoService {
         @InjectRepository(ContatoCli) public readonly contatoCliRepo: Repository<ContatoCli>,
         @InjectRepository(Endereco) public readonly enderecoRepo: Repository<Endereco>,
         @InjectRepository(Cep) public readonly cepRepo: Repository<Cep>,
+        @InjectRepository(Chat) public readonly chatRepo: Repository<Chat>,
+        @InjectRepository(ChatMensagem) public readonly chatMensagemRepo: Repository<ChatMensagem>,
     ) {}
 }
 

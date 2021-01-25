@@ -1,9 +1,7 @@
 import { ObjectType, Int, Field } from '@nestjs/graphql';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, Unique } from 'typeorm';
-import HoraTarefa from './horatarefa.entity';
-import ObservacaoTar from './observacaotar.entity';
-import Setor from './setor.entity';
-import Tarefa from './tarefa.entity';
+import { ChatMensagem, HoraTarefa, ObservacaoTar, Setor, Tarefa } from './entities';
+
 
 @ObjectType()
 @Unique(['usrEmail'])
@@ -66,4 +64,16 @@ export default class Usuario {
         observacaotar => observacaotar.usuarioConnection,
     )
     observacaotarConnection: Promise<ObservacaoTar[]>;
+
+    @OneToMany(
+        () => ChatMensagem,
+        chatMensagemRem => chatMensagemRem.usuarioRemConnection,
+    )
+    chatMensagemRemConnection: Promise<ChatMensagem[]>;
+
+    @OneToMany(
+        () => ChatMensagem,
+        chatMensagemDes => chatMensagemDes.usuarioDesConnection,
+    )
+    chatMensagemDesConnection: Promise<ChatMensagem[]>;
 }

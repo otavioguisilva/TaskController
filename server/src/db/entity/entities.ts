@@ -11,3 +11,5 @@ export { default as Cliente } from './cliente.entity';
 export { default as ContatoCli } from './contatoCli.entity';
 export { default as Endereco } from './endereco.entity';
 export { default as GrupoCliente } from './grupocliente.entity';
+export { default as Chat } from './chat.entity'
+export { default as ChatMensagem } from './chatmensagem.entity'

@@ -1,6 +1,6 @@
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { ClassificaTarInput } from 'src/resolvers/input/input';
 import RepoService from 'src/repo.service';
+import { ClassificaTarInput } from 'src/resolvers/input/input';
 import { ClassificaTar, Setor } from 'src/db/entity/entities';
 
 @Resolver(() => ClassificaTar)

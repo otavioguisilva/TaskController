@@ -1,4 +1,4 @@
-import { Column, MigrationInterface, QueryRunner, Table, TableColumn, TableForeignKey } from 'typeorm';
+import {  MigrationInterface, QueryRunner, Table,  TableForeignKey } from 'typeorm';
 
 export class criaEnderecoeContato1605897124306 implements MigrationInterface {
     private tabelaContato = new Table({

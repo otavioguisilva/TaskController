@@ -1,8 +1,8 @@
 import { Column, Entity } from 'typeorm';
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field,  ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-@Entity('cep', { schema: 'taskcontroller' })
+@Entity({name: 'cep'})
 export default class Cep {
     @Field()
     @Column('int', { primary: true, name: 'cep_codigo' })

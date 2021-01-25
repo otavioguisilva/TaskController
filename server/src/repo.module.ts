@@ -14,6 +14,8 @@ import {
     Endereco,
     ContatoCli,
     Cep,
+    Chat,
+    ChatMensagem
 } from './db/entity/entities';
 import RepoService from './repo.service';
 
@@ -34,6 +36,8 @@ import RepoService from './repo.service';
             ContatoCli,
             Endereco,
             Cep,
+            Chat,
+            ChatMensagem,
         ]),
     ],
     providers: [RepoService],

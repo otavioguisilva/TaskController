@@ -5,3 +5,5 @@ export { default as ObservacaoTarResolver } from './observacaotar.resolver';
 export { default as SetorResolver } from './setor.resolver';
 export { default as TarefaResolver } from './tarefa.resolver';
 export { default as UsuarioResolver } from './usuario.resolver';
+export { default as ChatResolver } from './chat.resolver';
+export { default as ChatMensagemResolver } from './chatmensagem.resolver';

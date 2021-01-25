@@ -13,6 +13,8 @@ import {
     TarefaResolver,
     ClassificaTarResolver,
     ClassificaHoraResolver,
+    ChatResolver,
+    ChatMensagemResolver
 } from './resolvers/resolvers';
 import { UploadController } from './upload.controller';
 import { UploadModule } from './upload.module';
@@ -25,6 +27,8 @@ const gqlImports = [
     HoraTarefaResolver,
     ObservacaoTarResolver,
     TarefaResolver,
+    ChatResolver,
+    ChatMensagemResolver,
 ];
 
 @Module({

@@ -1,6 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
-import ClassificaTarInput from './classificatar.input';
-import UsuarioInput from './usuario.input';
+
 
 // @InputType()
 // class TarCltConnectInput {

@@ -15,18 +15,6 @@ type Tarefa {
   getUsuario: Usuario!
 }
 
-type ClassificaTar {
-  cltCodigo: Int!
-  cltDescricao: String!
-  cltStrcodigo: Int!
-  setor: Setor!
-}
-
-type Setor {
-  strCodigo: Int!
-  strDescricao: String!
-}
-
 type Usuario {
   usrCodigo: Int!
   usrLogin: String!
@@ -54,11 +42,40 @@ type HoraTarefa {
   getTarefa: Tarefa!
 }
 
+type ClassificaTar {
+  cltCodigo: Int!
+  cltDescricao: String!
+  cltStrcodigo: Int!
+  setor: Setor!
+}
+
+type Setor {
+  strCodigo: Int!
+  strDescricao: String!
+}
+
 type ClassificaHora {
   clhCodigo: Int!
   clhDescricao: String!
   clhStrcodigo: Float!
   setor: Setor!
+}
+
+type Chat {
+  chaCodigo: Float!
+  chaUsuarios: String!
+}
+
+type ChatMensagem {
+  chmCodigo: Float!
+  chmChaCodigo: Int!
+  chmUsrCodigoRem: Int!
+  chmUsrCodigoDes: Int!
+  chmData: String
+  chmHora: String
+  chmMensagem: String!
+  Chat: Chat!
+  Usuario: Usuario!
 }
 
 type Query {
@@ -73,6 +90,10 @@ type Query {
   allUsuarios: [Usuario!]!
   getFotoUsuario(usrId: Float!): Usuario!
   buscaUsuario(valorCampo: String!, campo: String!): [Usuario!]!
+  allChat: [Chat!]!
+  getChat(id: Float!): Chat!
+  allMessages: [ChatMensagem!]!
+  getMessage(usrCodigo: Float, chaCodigo: Float, id: Float): ChatMensagem!
 }
 
 type Mutation {
@@ -87,6 +108,8 @@ type Mutation {
   loginUsuario(senha: String!, loginOrEmail: String!): Usuario
   alteraFotoUsuario(usrId: Float!, caminhoFoto: String!): Usuario!
   insereUsuario(datas: UsuarioInput!): Usuario!
+  createChat(data: ChatInput!): Chat!
+  newChatMessage(dataChat: ChatInput!, data: ChatMensagemInput!): ChatMensagem!
 }
 
 input ClassificaHoraInput {
@@ -139,6 +162,19 @@ input UsuarioInput {
   usrDtnascimento: String!
 }
 
+input ChatInput {
+  chaCodigo: Float
+  chaUsuarios: String!
+}
+
+input ChatMensagemInput {
+  chmChaCodigo: Int!
+  chmUsrCodigoRem: Int!
+  chmUsrCodigoDes: Int!
+  chmMensagem: String!
+}
+
 type Subscription {
   caminhoAlterado: Usuario!
+  hearNewMessage(chmUsrCodigoDes: Float!): ChatMensagem!
 }

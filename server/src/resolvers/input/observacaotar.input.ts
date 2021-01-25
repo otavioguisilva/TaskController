@@ -1,6 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
-import TarefaInput from './tarefa.input';
-import UsuarioInput from './usuario.input';
+
 
 // @InputType()
 // class ObtTarConnectInput {

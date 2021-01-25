@@ -1,5 +1,4 @@
 import { Field, InputType } from '@nestjs/graphql';
-import SetorInput from './setor.input';
 
 // @InputType()
 // class UsuarioSetorConnectInput {

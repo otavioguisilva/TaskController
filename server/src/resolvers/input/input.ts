@@ -5,3 +5,5 @@ export { default as ObservacaoTarInput } from './observacaotar.input';
 export { default as SetorInput } from './setor.input';
 export { default as TarefaInput } from './tarefa.input';
 export { default as UsuarioInput } from './usuario.input';
+export { default as ChatInput } from './chat.input';
+export { default as ChatMensagemInput } from './chatmensagem.input';

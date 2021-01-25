@@ -35,5 +35,7 @@ export class criaCEP1605900528138 implements MigrationInterface {
         await queryRunner.createTable(this.tabelaCEP);
     }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {}
+    public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable(this.tabelaCEP);
+    }
 }
