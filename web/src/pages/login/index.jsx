@@ -40,6 +40,8 @@ const Home = ({ history }) => {
         }
     );
 
+    
+
     async function logar(e) {
         e.preventDefault();
         await loginUsuario ({variables: {loginOrEmail: input, senha: inputS} })
