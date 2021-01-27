@@ -75,7 +75,8 @@ type ChatMensagem {
   chmHora: String
   chmMensagem: String!
   Chat: Chat!
-  Usuario: Usuario!
+  usuarioRem: Usuario!
+  usuarioDes: Usuario!
 }
 
 type Query {

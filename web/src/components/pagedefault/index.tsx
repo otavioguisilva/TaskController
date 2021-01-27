@@ -2,7 +2,7 @@ import React from 'react';
 import Menu from '../menu/menu';
 
 
-const PageDefault = ({children}) => {
+const PageDefault:React.FC = ({children}) => {
     return(
         <div className="PageDefault">
         <Menu/>
