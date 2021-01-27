@@ -17,6 +17,10 @@ mutation($caminhoFoto: String!, $usrId: Float!){
 }
 `;
 
+
+
+
+
 const PagePerfil = () => {
     const [ imgNova, setImgNova ] = useState('')
     let nomeFotousr;
