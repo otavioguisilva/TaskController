@@ -3,7 +3,8 @@ import { Clientes, Tarefa, Setor, Classificacao, MenuNav, MenuCima, MenuBaixo} f
 import Hexa from './components/hexagono';
 import HexaPerfil from './components/hexagonoPerfil'
 
-const Menu:React.FC = () =>  {
+
+const Menu = () =>  {
     return (
       <MenuNav>
         <HexaPerfil/>

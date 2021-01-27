@@ -1,25 +1,18 @@
 import styled from 'styled-components';
 import { imgTarefa, imgClientes, imgClassificacao, imgSetor } from './components/img/imagens'
 
-type Props ={
-    url : string
-};
-
 const corHexa = '00a2e8';
 
-function brilho(hex:string, luminosity=0) {
+function brilho(hex, luminosity=0) {
     hex = hex.replace(/[^0-9a-f]/gi, '');
     const isValidHex = hex.length === 6 || hex.length === 3;
     if (!isValidHex) throw new Error ("Invalid HEX");
-    if (hex.length === 3 ) {
+    if (hex.lenght === 3 ) {
         hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
     }
     const black = 0;
     const white = 255;
     const twoDigitGroup = hex.match(/([0-9a-f]){2}/gi)
-    if(twoDigitGroup === null) {
-        return
-    }
     let newHex = '#'
     for(let twoDigit of twoDigitGroup) {
         const numberFromHex = parseInt(twoDigit, 16);
@@ -216,7 +209,7 @@ float:right;
 
 export const ImagemPerfil = styled.div`
 overflow: hidden;
-background-image: url(${(props:Props) => props.url});
+background-image: url(${props => props.url});
 width:125px;
 height: 175px;
 `

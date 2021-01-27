@@ -83,6 +83,7 @@ class ChatMensagemResolver{
         .execute()
         const resultId = newMessage.generatedMaps[0];
         const result = await this.repoService.chatMensagemRepo.findOne(resultId);
+        console.log(result);
         pubSub.publish('hearNewMessage', { hearNewMessage: result });
         return result 
     }
@@ -100,22 +101,9 @@ class ChatMensagemResolver{
         return this.repoService.chatRepo.findOne(parent.chmChaCodigo);
     }
 
-    @ResolveField(() => Usuario, {name: 'usuarioRem'})
-    public async UsuarioRem(@Parent() parent) : Promise<Usuario> {
-        return this.repoService.usuarioRepo.findOne({
-            where: {
-                usrCodigo: parent.chmUsrCodigoRem,
-            },
-        });
-    }
-
-    @ResolveField(() => Usuario, {name: 'usuarioDes'})
-    public async UsuarioDes(@Parent() parent) : Promise<Usuario> {
-        return this.repoService.usuarioRepo.findOne({
-            where: {
-                usrCodigo: parent.chmUsrCodigoDes,
-            },
-        });
+    @ResolveField(() => Usuario)
+    public async Usuario(@Parent() parent) : Promise<Usuario> {
+        return this.repoService.usuarioRepo.findOne(parent.chmUsrCodigo);
     }
 
 }

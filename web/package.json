@@ -57,7 +57,6 @@
     ]
   },
   "devDependencies": {
-    "@types/apollo-upload-client": "^14.1.0",
     "@types/history": "^4.7.8",
     "@types/styled-components": "^5.1.4",
     "customize-cra": "^1.0.0",
